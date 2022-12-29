@@ -17,22 +17,11 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-
+import Home from './src/screens/home';
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-   <View></View>
+   <Home/>
   )}
 export default App;
