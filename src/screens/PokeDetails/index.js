@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
+import { Image, ScrollView, Text, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import { Get } from '../../services/pokeApi';
 import SvgUri from 'react-native-svg-uri';
@@ -92,12 +93,16 @@ const PokeDetails = ({ navigation, route }) => {
                 alignItems: 'center',
                 width: '100%'
 
-            }}><View style={{
-                backgroundColor: details?.types&&getColorByType(details?.types[0].type.name),
+            }}><LinearGradient colors={[details?.types?getColorByType(details?.types[0].type.name):'#fff','#fff']} style={{
+                //backgroundColor: details?.types&&getColorByType(details?.types[0].type.name),
                 width: '130%', height: 220,
                 borderBottomLeftRadius: 300,
-                borderBottomRightRadius: 300
-            }} />
+                borderBottomRightRadius: 300,
+                justifyContent:'center',
+                alignItems:'center'
+            }} >
+                {details?.types && <SvgUri source={getSvgByType(details?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />}
+            </LinearGradient>
                 <Image
                     style={{ height: 200, width: 200, bottom: 130 }}
                     source={{ uri: details?.sprites?.other["official-artwork"]?.front_default }}
