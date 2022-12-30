@@ -1,26 +1,20 @@
+import Axios from 'axios';
+import { setupCache } from 'axios-cache-interceptor';
 
-import { setup } from 'axios-cache-adapter'
+// same object, but with updated typings.
+const axios = setupCache(Axios);
+export const api =axios.create({baseURL:'https://pokeapi.co/api/v2'});
 
-// Create `axios` instance with pre-configured `axios-cache-adapter` attached to it
-const api = setup({
-  // `axios` options
-  baseURL: 'https://pokeapi.co/api/v2/',
-
-  // `axios-cache-adapter` options
-  cache: {
-    maxAge: 15 * 60 * 1000
+export const Get=(url) =>{
+  return new Promise((resolve,reject)=>{
+    axios.get(url).then((res)=>{
+     resolve(res) 
+    }).catch((res)=>reject(res))
+  })
   }
-})
+// const req2 = axios.get('https://pokeapi.co/api/v2/pokedex/1/');
 
-// Send a GET request to some REST api
-export const getpokedex=()=>{
-  api.get('pokedex/1/').then(async (response) => {
-  // Do something awesome with response.data \o/
-  console.log('Request response:', response)
+// const [res1, res2] = await Promise.all([req1, req2]);
 
-  // Interacting with the store, see `localForage` API.
-  const length = await api.cache.length()
 
-  console.log('Cache store length:', length)
-})}
-  
+//https://pokeapi.co/api/v2/pokedex/1/

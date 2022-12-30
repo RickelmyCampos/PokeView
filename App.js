@@ -17,11 +17,12 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import Routes from './src/routes/routes';
 import Home from './src/screens/home';
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-   <Home/>
+   <Routes/>
   )}
 export default App;

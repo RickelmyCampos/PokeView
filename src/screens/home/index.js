@@ -1,32 +1,39 @@
 import { React, useEffect, useState } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { FlatList, ScrollView, Text, TouchableOpacity, View, VirtualizedList } from 'react-native'
 import styles from './styles';
-import { getpokedex } from '../../services/pokeApi';
+import { api } from '../../services/pokeApi'
 
-const Home = () => {
-  const [pokedex, setPokedex] = useState(null)
+const Home = ({navigation}) => {
+  const [pokedex, setPokedex] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     setPokedex([])
-    getpokedex();
+    api.get('/pokedex/1/').then((res) => {
+      console.log(res.data)
+      setPokedex(res.data.pokemon_entries)
+    })
 
   }, [])
   return (
-    <ScrollView contentContainerStyle={[styles.main, { flexGrow: 1 }]}>
-      <View style={[styles.main, { flex: 1 }]}>
-<Text>Teste</Text>
-        {pokedex && pokedex.length > 0 && pokedex.map((item, index) => {
 
-          return (
-            <View style={styles.card} key={index}>
-              <Text style={[styles.textCard, { marginRight: 10 }]}>{item.entry_number}</Text>
-              <Text style={styles.textCard}>{item.pokemon_species.name}</Text>
-            </View>
-          )
-        }
+    <View style={[styles.main, { flex: 1 }]}>
+
+     
+      <VirtualizedList
+        data={pokedex}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('PokeDetails',{details:item.pokemon_species.url})} >
+            <Text style={[styles.textCard, { marginRight: 10 }]}>{item.entry_number}</Text>
+            <Text style={styles.textCard}>{item.pokemon_species.name}</Text>
+          </TouchableOpacity>
         )}
-      </View>
-    </ScrollView>
+        keyExtractor={item => item.entry_number}
+        getItemCount={data => data.length}
+        getItem={(data, index) => data[index]}
+        
+      />
+    </View>
+
   );
 }
 export default Home;
