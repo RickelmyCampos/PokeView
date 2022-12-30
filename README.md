@@ -19,6 +19,12 @@ Ao iniciar o PokeView, você verá uma lista de todos os Pokémon disponíveis. 
 
 Para ver sua coleção, toque no botão "Minha coleção" na barra de navegação inferior. Aqui, você verá uma lista de todos os Pokémon que você adicionou à sua coleção. Toque em um Pokémon para ver suas informações detalhadas.
 
+## A fazer
+
+- [ ] Listar todos os pokemons da National Dex.
+- [ ] Tela de detalhes de pokemon.
+- [ ] Criar styles da tela de detalhes de pokemon.
+
 ## Links
 
 [Notion](https://broad-century-fa4.notion.site/PokeView-fc89b29d1ff145a789a53c469bfd0f16)
