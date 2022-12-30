@@ -3,7 +3,8 @@ import { Image, ScrollView, Text, View } from 'react-native'
 import styles from './styles';
 import { Get } from '../../services/pokeApi';
 import SvgUri from 'react-native-svg-uri';
-import { getColorByType, getSvgByType } from '../../utils/colorTypes'
+import { getColorByType } from '../../utils/colorTypes'
+import { calcPesoAlt, firstUpper, format_descDex, format_numDex } from '../../utils/usage';
 const PokeDetails = ({ navigation, route }) => {
     const url = route.params.details;
     const [details, setDetails] = useState({})
@@ -19,17 +20,7 @@ const PokeDetails = ({ navigation, route }) => {
         }).catch((e) => console.log(e))
 
     }, [])
-    const format_descDex = (text) => {
-        //console.log(text.replace(/(\r\n|\n|\r)/gm, ''));  // Imprime "Linha 1Linha 2Linha 3"
-        return (text.replace(/(\r\n|\n|\r)/gm, ''))
-    }
-    const format_numDex = (num) => {
-        return String(num).padStart(3, '0');
-    }
-    const calcPesoAlt = (peso) => {
-        //peso hectograma para kilo
-        return String(peso / 10).replace('.', ',')
-    }
+   
     const getSvgByType = (type) => {
         switch (type) {
             case 'bug':
@@ -90,6 +81,7 @@ const PokeDetails = ({ navigation, route }) => {
             default:
         }
     }
+   
 
 
     return (
@@ -114,7 +106,7 @@ const PokeDetails = ({ navigation, route }) => {
             <View style={styles.infoDex}>
                 <View>
 
-                    <Text style={styles.textPokemonName}>{dexDetails?.name}</Text>
+                    <Text style={styles.textPokemonName}>{dexDetails?.name&&firstUpper(dexDetails?.name)}</Text>
                     <Text style={styles.textDexNumber}> N°{dexDetails?.id && format_numDex(dexDetails?.id)}</Text>
                 </View>
                 <View>

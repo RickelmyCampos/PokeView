@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react'
 import { FlatList, ScrollView, Text, TouchableOpacity, View, VirtualizedList } from 'react-native'
 import styles from './styles';
 import { api } from '../../services/pokeApi'
+import { firstUpper, format_numDex } from '../../utils/usage';
 
 const Home = ({navigation}) => {
   const [pokedex, setPokedex] = useState([])
@@ -23,8 +24,8 @@ const Home = ({navigation}) => {
         data={pokedex}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('PokeDetails',{details:item.pokemon_species.url})} >
-            <Text style={[styles.textCard, { marginRight: 10 }]}>{item.entry_number}</Text>
-            <Text style={styles.textCard}>{item.pokemon_species.name}</Text>
+            <Text style={[styles.textCard, { marginRight: 10 }]}>{format_numDex(item.entry_number)}</Text>
+            <Text style={styles.textCard}>{firstUpper(item.pokemon_species.name)}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={item => item.entry_number}
