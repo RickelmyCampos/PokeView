@@ -1,27 +1,48 @@
 import { React, useEffect, useState } from 'react'
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import { Get } from '../../services/pokeApi';
 import SvgUri from 'react-native-svg-uri';
 import { getColorByType } from '../../utils/colorTypes'
 import { calcPesoAlt, firstUpper, format_descDex, format_numDex } from '../../utils/usage';
+import Header from '../../components/Header';
+import StatusBase from '../../components/statusBase';
+
 const PokeDetails = ({ navigation, route }) => {
     const url = route.params.details;
+    const [catched, setCatched] = useState(false);
     const [details, setDetails] = useState({})
     const [dexDetails, setDexDetails] = useState({})
+    const [isShiny, setIsShiny] = useState(false)
+    const [stats,setStats]=useState({
+        hp:0,
+        attack:0,
+        defense:0,
+        "special-attack":0,
+        "special-defense":0,
+        speed:0
+    })
+   
+    const updateValue=(key,value)=>{
+        setStats(old => ({...old, [key]: value}))
+    }
     useEffect(() => {
+        navigation.setParams({ backgroundColor: 'red' })
         console.log(url)
         Get(url).then(async (res) => {
             setDexDetails(res.data)
             await Get(res.data.varieties[0].pokemon.url).then((response) => {
                 setDetails(response.data)
-                console.log(response.data.sprites.other["official-artwork"].front_default)
+                response.data.stats.map(item=>{
+                    updateValue(item.stat.name,item.base_stat)
+
+                })
             }).catch((err) => console.log(err))
         }).catch((e) => console.log(e))
 
     }, [])
-   
+
     const getSvgByType = (type) => {
         switch (type) {
             case 'bug':
@@ -82,87 +103,122 @@ const PokeDetails = ({ navigation, route }) => {
             default:
         }
     }
-   
+
 
 
     return (
         <View style={styles.main}>
-            <View style={{
+            <Header
+                backgroundColor={details?.types && getColorByType(details?.types[0].type.name)}
+                navigate={() => navigation.goBack()}
+                catched={catched}
+                setCatched={() => setCatched(!catched)}
+            />
+            <ScrollView style={{ width: '100%' }}>
+                <View style={styles.main}>
+                    <View style={{
 
-                height: 300,
-                alignItems: 'center',
-                width: '100%'
+                        height: 300,
+                        alignItems: 'center',
+                        width: '100%'
 
-            }}><LinearGradient colors={[details?.types?getColorByType(details?.types[0].type.name):'#fff','#fff']} style={{
-                //backgroundColor: details?.types&&getColorByType(details?.types[0].type.name),
-                width: '130%', height: 220,
-                borderBottomLeftRadius: 300,
-                borderBottomRightRadius: 300,
-                justifyContent:'center',
-                alignItems:'center'
-            }} >
-                {details?.types && <SvgUri source={getSvgByType(details?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />}
-            </LinearGradient>
-                <Image
-                    style={{ height: 200, width: 200, bottom: 130 }}
-                    source={{ uri: details?.sprites?.other["official-artwork"]?.front_default }}
-                />
-            </View>
-            <View style={styles.infoDex}>
-                <View>
+                    }}><LinearGradient colors={[details?.types ? getColorByType(details?.types[0].type.name) : '#fff', '#fff']} style={{
+                        //backgroundColor: details?.types&&getColorByType(details?.types[0].type.name),
+                        width: '130%', height: 220,
+                        borderBottomLeftRadius: 300,
+                        borderBottomRightRadius: 300,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }} >
+                            {details?.types && <SvgUri source={getSvgByType(details?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />}
+                        </LinearGradient>
+                        <TouchableOpacity onPress={() => setIsShiny(!isShiny)}>
 
-                    <Text style={styles.textPokemonName}>{dexDetails?.name&&firstUpper(dexDetails?.name)}</Text>
-                    <Text style={styles.textDexNumber}> N°{dexDetails?.id && format_numDex(dexDetails?.id)}</Text>
-                </View>
-                <View>
+                            <Image
+                                style={{ height: 200, width: 200, bottom: 130 }}
+                                source={{
+                                    uri: (!isShiny) ? details?.sprites?.front_default : details?.sprites?.front_shiny
+                                    //other["official-artwork"]?.front_default
+                                }}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.infoDex}>
+                        <View>
 
-                    <Text style={styles.textMain}>Nv</Text>
-                    <Text style={styles.textDesc}> Evolve</Text>
-                </View>
-            </View>
-            <View style={styles.contentTypes}>
-                {details.types && details?.types.map(item => (
-                    <View key={item.slot} style={styles.cardType}>
-                        <View style={{ backgroundColor: getColorByType(item.type.name), height: 30, width: 30, borderRadius: 30, margin: 5,justifyContent:'center',alignItems:'center'}}>
-                            {item.type.name && <SvgUri source={getSvgByType(item.type.name)} width="18" height={"18"} />}
+                            <Text style={styles.textPokemonName}>{dexDetails?.name && firstUpper(dexDetails?.name)}</Text>
+                            <Text style={styles.textDexNumber}> N°{dexDetails?.id && format_numDex(dexDetails?.id)}</Text>
                         </View>
-                        <Text style={styles.textCardType}>{item.type.name}</Text>
-                    </View>
-                ))}
-            </View>
-            <View style={[styles.infoDex, { flexDirection: 'column' }]}>
-                <View style={styles.row}>
-                    <View style={styles.cell}>
-                        <Text style={styles.textTitle}>Peso</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.textTitle}>Altura</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.textTitle}>Habilidade</Text>
-                    </View>
+                        <View>
 
+                            <Text style={styles.textMain}>Nv</Text>
+                            <Text style={styles.textDesc}> Evolve</Text>
+                        </View>
+                    </View>
+                    <View style={styles.contentTypes}>
+                        {details.types && details?.types.map(item => (
+                            <View key={item.slot} style={styles.cardType}>
+                                <View style={{ backgroundColor: getColorByType(item.type.name), height: 30, width: 30, borderRadius: 30, margin: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                    {item.type.name && <SvgUri source={getSvgByType(item.type.name)} width="18" height={"18"} />}
+                                </View>
+                                <Text style={styles.textCardType}>{item.type.name}</Text>
+                            </View>
+                        ))}
+                    </View>
+                    <View style={[styles.infoDex, { flexDirection: 'column' }]}>
+                        <View style={styles.row}>
+                            <View style={styles.cell}>
+                                <Text style={styles.textTitle}>Peso</Text>
+                            </View>
+                            <View style={styles.cell}>
+                                <Text style={styles.textTitle}>Altura</Text>
+                            </View>
+                            <View style={styles.cell}>
+                                <Text style={styles.textTitle}>Habilidade</Text>
+                            </View>
+
+                        </View>
+                        <View style={styles.row}>
+
+                            <View style={styles.cell}>
+                                <Text style={styles.textValue}>{details?.weight && calcPesoAlt(details?.weight)} kg</Text>
+                            </View>
+                            <View style={styles.cell}>
+                                <Text style={styles.textValue}>{details?.height && calcPesoAlt(details?.height)} m</Text>
+                            </View>
+                            <View style={styles.cell}>
+                                <Text style={styles.textValue}>{details.abilities && details?.abilities[0]?.ability.name}</Text>
+                            </View>
+                        </View>
+
+                    </View>
+                    <View style={styles.description}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <Text style={styles.textDescriptionInfo}>Pokemon {dexDetails?.flavor_text_entries && dexDetails?.flavor_text_entries[0]?.version.name}</Text>
+                            <Text style={styles.textDescriptionInfo}>Language: {dexDetails?.flavor_text_entries && dexDetails?.flavor_text_entries[0]?.language.name}</Text>
+                        </View>
+                        <Text style={styles.textDescription}>
+                            {dexDetails?.flavor_text_entries && format_descDex(dexDetails?.flavor_text_entries[0]?.flavor_text)}
+                        </Text>
+                    </View>
+                    <Text style={[styles.textValue,{color:details?.types && getColorByType(details?.types[0].type.name)}]}>Base Stats</Text>
+                    <StatusBase 
+                    color={details?.types && getColorByType(details?.types[0].type.name)} 
+                    Hp={stats.hp}
+                    Attack={stats.attack}
+                    Defense={stats.defense}
+                    SpAtk={stats['special-attack']}
+                    SpDef={stats['special-defense']}
+                    Speed={stats.speed}
+                    />
                 </View>
-                <View style={styles.row}>
-
-                    <View style={styles.cell}>
-                        <Text style={styles.textValue}>{details?.weight && calcPesoAlt(details?.weight)} kg</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.textValue}>{details?.height && calcPesoAlt(details?.height)} m</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.textValue}>{details.abilities && details?.abilities[0]?.ability.name}</Text>
-                    </View>
-                </View>
-
-            </View>
-            <View style={styles.description}>
-                <Text style={styles.textDescription}>
-                    {dexDetails?.flavor_text_entries && format_descDex(dexDetails?.flavor_text_entries[0]?.flavor_text)}
-                </Text>
-            </View>
+            </ScrollView>
         </View>
     );
 }
+navigationOptions = ({ navigation }) => {
+    return {
+        navigationOptions: navigation.getParams("navigationOptions"),
+    };
+};
 export default PokeDetails;

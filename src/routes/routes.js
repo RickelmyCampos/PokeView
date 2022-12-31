@@ -3,16 +3,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //Screens
 import Home from '../screens/home';
 import Settings from '../screens/settings';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import PokeDetails from '../screens/PokeDetails';
+import Header from '../components/Header';
 
 const Tab = createBottomTabNavigator();
 const Stack=createNativeStackNavigator();
 const StackScreens=()=>{
+    
     return (
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator  initialRouteName="Home">
             <Stack.Screen name='Home' component={TabScreens} />
-            <Stack.Screen name='PokeDetails' component={PokeDetails} />
+            <Stack.Screen name='PokeDetails' component={PokeDetails} options={{headerShown:false}} />
             
         </Stack.Navigator>
     );  
