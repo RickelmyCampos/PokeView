@@ -7,7 +7,7 @@ import SvgUri from 'react-native-svg-uri';
 import { getColorByType } from '../../utils/colorTypes'
 import { calcPesoAlt, firstUpper, format_descDex, format_numDex } from '../../utils/usage';
 import Header from '../../components/Header';
-import StatusBase from '../../components/statusBase';
+import StatusBase from '../../components/StatusBase/';
 
 const PokeDetails = ({ navigation, route }) => {
     const url = route.params.details;
@@ -32,8 +32,10 @@ const PokeDetails = ({ navigation, route }) => {
         console.log(url)
         Get(url).then(async (res) => {
             setDexDetails(res.data)
+            console.log(res.data)
             await Get(res.data.varieties[0].pokemon.url).then((response) => {
                 setDetails(response.data)
+                console.log(response.data)
                 response.data.stats.map(item=>{
                     updateValue(item.stat.name,item.base_stat)
 
@@ -109,6 +111,7 @@ const PokeDetails = ({ navigation, route }) => {
     return (
         <View style={styles.main}>
             <Header
+                type={1}
                 backgroundColor={details?.types && getColorByType(details?.types[0].type.name)}
                 navigate={() => navigation.goBack()}
                 catched={catched}
@@ -130,7 +133,7 @@ const PokeDetails = ({ navigation, route }) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }} >
-                            {details?.types && <SvgUri source={getSvgByType(details?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />}
+                            {/* {details?.types && <SvgUri source={getSvgByType(details?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />} */}
                         </LinearGradient>
                         <TouchableOpacity onPress={() => setIsShiny(!isShiny)}>
 
@@ -159,7 +162,7 @@ const PokeDetails = ({ navigation, route }) => {
                         {details.types && details?.types.map(item => (
                             <View key={item.slot} style={styles.cardType}>
                                 <View style={{ backgroundColor: getColorByType(item.type.name), height: 30, width: 30, borderRadius: 30, margin: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                    {item.type.name && <SvgUri source={getSvgByType(item.type.name)} width="18" height={"18"} />}
+                                    {/* {item.type.name && <SvgUri source={getSvgByType(item.type.name)} width="18" height={"18"} />} */}
                                 </View>
                                 <Text style={styles.textCardType}>{item.type.name}</Text>
                             </View>

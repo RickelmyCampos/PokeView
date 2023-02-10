@@ -1,6 +1,8 @@
 import * as Icon from "phosphor-react-native";
 export const selectIcon = (name, size, weight, color) => {
     switch (name) {
+        case "ArrowRight":
+            return (<Icon.ArrowRight size={size} weight={weight} color={color} />)
         case "Airplane":
             return (<Icon.Airplane size={size} weight={weight} color={color} />)
         case "Scroll":
