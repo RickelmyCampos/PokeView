@@ -12,7 +12,7 @@ import Login3 from '../screens/Login/Login3';
 import auth from '@react-native-firebase/auth';
 import { View, Text } from 'react-native';
 import { useEffect, useState } from 'react';
-import Register from '../screens/Login/register/register1';
+import Register from '../screens/Login/register';
 import Register1 from '../screens/Login/register/register1';
 
 

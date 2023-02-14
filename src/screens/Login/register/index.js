@@ -19,10 +19,10 @@ const Register = ({ navigation }) => {
                 {/* Header */}
                 <Header type={2} title={'Entrar'} goback={()=>navigation.goBack()}/>
                 {/* Imagem */}
-                <Image source={require('../../../assets/images/1treiner-1.png')} style={{ width: '100%', resizeMode: 'contain', height: '50%' }} />
+                <Image source={require('../../../assets/images/1treiner-2.png')} style={{ width: '100%', resizeMode: 'contain', height: '50%' }} />
                 {/* texto  */}
                 <Text style={styles.textLarge}>
-                    Que bom te ver aqui novamente!
+                    Falta pouco para explorar esse mundo! 
                 </Text>
                 <Text style={styles.textNormal}>
                     Como deseja se conectar?
@@ -39,7 +39,7 @@ const Register = ({ navigation }) => {
                             </Text>
                       
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Login3")}>
+                    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Register1")}>
                         <Text style={styles.textButton}>
                             Continuar com um e-mail
                         </Text>
