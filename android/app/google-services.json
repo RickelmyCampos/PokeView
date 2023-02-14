@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "895446558314",
+    "project_id": "pokeview-1fb9f",
+    "storage_bucket": "pokeview-1fb9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895446558314:android:e250fb32eee90525308c13",
+        "android_client_info": {
+          "package_name": "com.pokeview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895446558314-lvrr8kti4vrvbton2n593jnf1ss0d5i5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pokeview",
+            "certificate_hash": "24e59fac09edf37a5d737978a2139c96e1e48344"
+          }
+        },
+        {
+          "client_id": "895446558314-sm9ojao19lve4kh2lsvm95pnejkrcagf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf7WCpac8k7O4GBywNMdMXDGzDJ0HL4sc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895446558314-sm9ojao19lve4kh2lsvm95pnejkrcagf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

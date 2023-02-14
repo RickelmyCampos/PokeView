@@ -3,7 +3,11 @@ import { Button, FlatList, ScrollView, Text, TouchableOpacity, View, Virtualized
 import Header from '../../../components/Header';
 import { colors, metrics } from '../../../styles';
 import { selectIcon } from '../../../utils/icons';
-import { GoogleSignin, GoogleSigninButton } from '@react-native-community/google-signin';
+import {
+    GoogleSignin,
+    GoogleSigninButton,
+    statusCodes,
+} from '@react-native-google-signin/google-signin';
 import styles from './styles';
 
 
@@ -13,9 +17,9 @@ const Login2 = ({ navigation }) => {
         <View style={{ width: metrics.screenWidth, height: metrics.screenHeight, backgroundColor: colors.background }}>
             <View style={[styles.main, { flex: 1 }]}>
                 {/* Header */}
-                <Header type={2} title={'Entrar'} />
+                <Header type={2} title={'Entrar'} goback={()=>navigation.goBack()}/>
                 {/* Imagem */}
-                <Image source={require('../../../assets/images/2treiners-1.png')} style={{ width: '100%', resizeMode: 'contain', height: '50%' }} />
+                <Image source={require('../../../assets/images/1treiner-1.png')} style={{ width: '100%', resizeMode: 'contain', height: '50%' }} />
                 {/* texto  */}
                 <Text style={styles.textLarge}>
                     Que bom te ver aqui novamente!
@@ -25,17 +29,17 @@ const Login2 = ({ navigation }) => {
                 </Text>
                 {/* botoes */}
                 <View style={{ width: '100%', marginVertical: 50, }}>
-                    <TouchableOpacity style={[styles.button, { backgroundColor: colors.background }]}>
-                        <Text style={[styles.textButton, { color: colors.primary }]}>
-                            Já tenho uma conta
-                        </Text>
+                    
+
+                    <TouchableOpacity style={[styles.button, { backgroundColor: colors.background, borderColor: colors.grey, borderWidth: 2, flexDirection: 'row', justifyContent: 'center', paddingHorizontal: 25 }]}>
+                        <Image source={require("../../../assets/icons/google/google-logo.png")} style={{ width: 26, height: 26, resizeMode: 'contain' }} />
+                       
+                            <Text style={[styles.textButton, { color: colors.textLight,marginHorizontal: 10 }]}>
+                                Continuar com o Google
+                            </Text>
+                      
                     </TouchableOpacity>
-                    <GoogleSigninButton
-                        style={{ width: 192, height: 48 }}
-                        size={GoogleSigninButton.Size.Wide}
-                        color={GoogleSigninButton.Color.Dark}
-                         />
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Login3")}>
                         <Text style={styles.textButton}>
                             Continuar com um e-mail
                         </Text>

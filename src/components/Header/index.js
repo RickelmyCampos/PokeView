@@ -30,7 +30,7 @@ const Header = (props) => {
       case 2:
         return (
           <View style={[styles.header]}>
-            <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+            <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} onPress={props.goback}>
               {selectIcon("ArrowLeft", 20, "bold", colors.text)}
             </TouchableOpacity>
             <Text style={styles.headertext}>{props.title}</Text>

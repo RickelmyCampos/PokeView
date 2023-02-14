@@ -30,6 +30,10 @@ const general = {
     alignItems:'center',
     borderRadius:metrics.baseRadius,
     marginVertical:5
+  },
+  textInput:{
+    width:'100%',
+    backgroundColor:colors.background
   }
 };
 

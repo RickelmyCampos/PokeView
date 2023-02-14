@@ -3,6 +3,8 @@ import { FlatList, ScrollView, Text, TouchableOpacity, View, VirtualizedList } f
 import styles from './styles';
 import { api } from '../../services/pokeApi'
 import { firstUpper, format_numDex } from '../../utils/usage';
+import { general } from '../../styles';
+import auth from '@react-native-firebase/auth';
 
 const Home = ({navigation}) => {
   const [pokedex, setPokedex] = useState([])
@@ -15,12 +17,17 @@ const Home = ({navigation}) => {
     })
 
   }, [])
+  const Logout=()=>{
+     auth().signOut().then(() => console.log('User signed out!'));
+  }
   return (
 
     <View style={[styles.main, { flex: 1 }]}>
 
-     
-      <VirtualizedList
+     <TouchableOpacity style={general.buttonStyle} onPress={()=>Logout()}>
+      <Text style={general.buttonText}>Sair</Text>
+     </TouchableOpacity>
+      {/* <VirtualizedList
         data={pokedex}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('PokeDetails',{details:item.pokemon_species.url})} >
@@ -32,7 +39,7 @@ const Home = ({navigation}) => {
         getItemCount={data => data.length}
         getItem={(data, index) => data[index]}
         
-      />
+      /> */}
     </View>
 
   );

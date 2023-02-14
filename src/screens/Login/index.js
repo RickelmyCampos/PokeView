@@ -27,8 +27,8 @@ const Login = ({ navigation }) => {
                     Basta criar uma conta e começar a explorar o mundo dos Pokémon hoje!
                 </Text>
                 {/* botoes */}
-                <View style={{ width: '100%', marginVertical: 50, }}>
-                    <TouchableOpacity style={styles.button}>
+                <View style={{ width: '100%', marginVertical: 50, }} >
+                    <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate('Register')}>
                         <Text style={styles.textButton}>
                             Criar conta
                         </Text>
