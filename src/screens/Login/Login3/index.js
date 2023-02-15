@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import { Button, FlatList, ScrollView, Text, TouchableOpacity, View, VirtualizedList, Image, SafeAreaView, KeyboardAvoidingView } from 'react-native'
+import { Button, FlatList, ScrollView, Text, TouchableOpacity, View, VirtualizedList, Image, SafeAreaView, KeyboardAvoidingView, Alert } from 'react-native'
 import Header from '../../../components/Header';
 import { colors, metrics } from '../../../styles';
 import { selectIcon } from '../../../utils/icons';
@@ -7,6 +7,7 @@ import { selectIcon } from '../../../utils/icons';
 import styles from './styles';
 import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+import { LoginWithEmailPassword } from '../../../services/auth';
 
 
 
@@ -14,33 +15,19 @@ const Login3 = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading,setLoading]=useState(false)
-    const LoginWithEmailPassword =async () => {
+    const [errEmail,setErrEmail]=useState(false)
+    const [errPass,setErrPass]=useState(false)
+    const Login = async() => {
         console.log("Entrou")
         setLoading(true);
-         await auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(() => {
-                console.log('User account created & signed in!');
-            })
-            .catch(error => {
-                if (error.code === 'auth/email-already-in-use') {
-                    console.log('That email address is already in use!');
-                }
-
-                if (error.code === 'auth/invalid-email') {
-                    console.log('That email address is invalid!');
-                }
-
-                console.error(error);
-            });
+       await LoginWithEmailPassword(email,password)
             setLoading(false);
             console.log("logou")
     }
     return (
         <SafeAreaView>
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            >
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <View style={{ width: metrics.screenWidth, height: "100%", backgroundColor: colors.background }}>
                     <View style={[styles.main, { flex: 1 }]}>
                         {/* Header */}
@@ -65,7 +52,7 @@ const Login3 = ({ navigation }) => {
                                     value={email}
                                     onChangeText={(text) => setEmail(text)}
                                     mode={'outlined'}
-
+                                    error={errEmail}
                                     activeOutlineColor={colors.text}
                                     outlineColor={colors.grey}
                                 />
@@ -75,7 +62,7 @@ const Login3 = ({ navigation }) => {
                                     value={password}
                                     onChangeText={(text) => setPassword(text)}
                                     mode={'outlined'}
-
+                                    error={errPass}
                                     activeOutlineColor={colors.text}
                                     outlineColor={colors.grey}
                                 />
@@ -86,7 +73,7 @@ const Login3 = ({ navigation }) => {
                         </View>
                         <View style={{ width: '100%', marginVertical: 50, }}>
 
-                            <TouchableOpacity style={styles.button} disabled={loading} onPress={()=>LoginWithEmailPassword()}>
+                            <TouchableOpacity style={styles.button} disabled={loading} onPress={()=>Login()}>
                                 <Text style={styles.textButton}>
                                    {loading?"Carregando":'Entrar'} 
                                 </Text>

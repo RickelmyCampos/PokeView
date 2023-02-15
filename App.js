@@ -23,6 +23,8 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-   <Routes/>
+    
+      <Routes/>
+    
   )}
 export default App;

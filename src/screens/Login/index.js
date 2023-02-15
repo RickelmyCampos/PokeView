@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import { Button, FlatList, ScrollView, Text, TouchableOpacity, View, VirtualizedList, Image } from 'react-native'
+import { LoginAnonymous } from '../../services/auth';
 import { colors, metrics } from '../../styles';
 import { selectIcon } from '../../utils/icons';
 import styles from './styles';
@@ -12,7 +13,7 @@ const Login = ({ navigation }) => {
             <View style={[styles.main, { flex: 1 }]}>
                 {/* Header */}
                 <View style={[styles.header]}>
-                    <TouchableOpacity style={{  justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                    <TouchableOpacity style={{  justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}} onPress={()=>LoginAnonymous()}>
                         <Text style={styles.headertext}>Pular</Text>
                         {selectIcon("ArrowRight", 20, "bold", colors.text)}
                     </TouchableOpacity>

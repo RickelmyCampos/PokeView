@@ -22,7 +22,7 @@ const StackScreens = () => {
 
     return (
         <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name='Home' component={TabScreens} />
+            <Stack.Screen name='Home' component={TabScreens} options={{ headerShown: false }}/>
             <Stack.Screen name='PokeDetails' component={PokeDetails} options={{ headerShown: false }} />
 
         </Stack.Navigator>
@@ -45,7 +45,7 @@ const TabScreens = () => {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen name='HomeTab' component={Home} />
-            <Tab.Screen name='Settings' component={Settings} />
+            <Tab.Screen name='Settings' component={Settings}  />
         </Tab.Navigator>
     );
 }
@@ -65,7 +65,8 @@ function isAuth() {
         return subscriber; // unsubscribe on unmount
     }, []);
 
-    if (initializing) return null;
+    if (initializing) return (<View><Text>
+        CARREGANDO</Text></View>);
 
     if (!user) {
         return (

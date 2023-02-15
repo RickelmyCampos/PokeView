@@ -7,6 +7,7 @@ import { selectIcon } from '../../../../utils/icons';
 import styles from './styles';
 import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+import { CreateLoginWithEmailPassword } from '../../../../services/auth';
 
 
 
@@ -56,7 +57,7 @@ const Register1 = ({ navigation }) => {
 
                         <TouchableOpacity style={styles.button} disabled={loading} onPress={()=>SetView(2)}>
                             <Text style={styles.textButton}>
-                               {loading?"Carregando":'Entrar'} 
+                               {loading?"Carregando":'Continuar'} 
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -87,7 +88,7 @@ const Register1 = ({ navigation }) => {
                             <TextInput
                                 style={styles.textInput}
                                 label="Senha"
-                                value={email}
+                                value={password}
                                 onChangeText={(text) => setPassword(text)}
                                 mode={'outlined'}
 
@@ -103,7 +104,7 @@ const Register1 = ({ navigation }) => {
 
                         <TouchableOpacity style={styles.button} disabled={loading} onPress={()=>SetView(3)}>
                             <Text style={styles.textButton}>
-                               {loading?"Carregando":'Entrar'} 
+                               {loading?"Carregando":'Continuar'} 
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -133,8 +134,8 @@ const Register1 = ({ navigation }) => {
                                 <TextInput
                                     style={styles.textInput}
                                     label="Nome"
-                                    value={email}
-                                    onChangeText={(text) => setPassword(text)}
+                                    value={userName}
+                                    onChangeText={(text) => setUserName(text)}
                                     mode={'outlined'}
     
                                     activeOutlineColor={colors.text}
@@ -147,9 +148,9 @@ const Register1 = ({ navigation }) => {
                         </View>
                         <View style={{ width: '100%', marginVertical: 50, }}>
     
-                            <TouchableOpacity style={styles.button} disabled={loading} onPress={()=>CreateLoginWithEmailPassword()}>
+                            <TouchableOpacity style={styles.button} disabled={loading} onPress={()=>Create()}>
                                 <Text style={styles.textButton}>
-                                   {loading?"Carregando":'Entrar'} 
+                                   {loading?"Carregando":'Continuar'} 
                                 </Text>
                             </TouchableOpacity>
                         </View>
@@ -164,27 +165,12 @@ const Register1 = ({ navigation }) => {
                 break;
         }
     }
-    const CreateLoginWithEmailPassword =async () => {
+    const Create =async () => {
         console.log("Entrou")
         setLoading(true);
-         await auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(() => {
-                console.log('User account created & signed in!');
-            })
-            .catch(error => {
-                if (error.code === 'auth/email-already-in-use') {
-                    console.log('That email address is already in use!');
-                }
-
-                if (error.code === 'auth/invalid-email') {
-                    console.log('That email address is invalid!');
-                }
-
-                console.error(error);
-            });
-            setLoading(false);
-            console.log("logou")
+        await CreateLoginWithEmailPassword(email,password,userName)
+        setLoading(false);
+        console.log("logou")
     }
     return (
         <SafeAreaView>

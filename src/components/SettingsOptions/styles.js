@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, general, metrics } from '../../styles';
+import { colors, fonts, general } from '../../styles';
 
 const styles = StyleSheet.create({
-    main: [general.container,
-    {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'space-between'
-    }],
+    main: {
+        width:'100%',
+        marginTop: 25,
+        
+    },
     textMain: {
         fontFamily: fonts.family.semiBold,
         fontSize: fonts.size.medium,
@@ -23,15 +22,11 @@ const styles = StyleSheet.create({
         fontSize: fonts.size.input,
         color: colors.textLight
     },
-    loginMain:{
-        width:'100%',
-        borderBottomWidth:1,
-        borderColor:colors.grey,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    loginContent:{
-        width:'90%',
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical:10
     }
 });
 

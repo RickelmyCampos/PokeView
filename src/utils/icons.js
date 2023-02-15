@@ -21,7 +21,7 @@ export const selectIcon = (name, size, weight, color) => {
             return (<Icon.CalendarBlank size={size} weight={weight} color={color} />)
         case "ArrowLeft":
             return (<Icon.CaretLeft size={size} weight={weight} color={color} />)
-        case "ArrowRight":
+        case "1ArrowRight":
             return (<Icon.CaretRight size={size} weight={weight} color={color} />)
         case "ReloadHorario":
             return (<Icon.ArrowClockwise size={size} weight={weight} color={color} />)

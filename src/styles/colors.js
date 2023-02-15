@@ -9,6 +9,7 @@ const colors = {
     //text colors
     text:'#000000',
     textLight:'#666666',
+    textGreyDark:'#333333',
     //Types color pokemon
     allTypes:'#333333',
     waterType:'#5090D6',
