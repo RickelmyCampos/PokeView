@@ -2,8 +2,10 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
 main:{
-    
-   
+    justifyContent:'center',
+    alignItems:'center',
+    width:'90%',
+    alignSelf:'center'
 },
 contentImagePkm:{
     height:100,
@@ -36,6 +38,7 @@ general:{
     padding:10
 },
 card:{
+    width:'100%',
     padding:10,
     flexDirection:'row',
     borderBottomWidth:4,

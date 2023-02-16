@@ -33,7 +33,9 @@ const general = {
   },
   textInput:{
     width:'100%',
-    backgroundColor:colors.background
+    backgroundColor:colors.background,
+    borderWidth:2,
+    borderRadius:metrics.inputRadius
   }
 };
 

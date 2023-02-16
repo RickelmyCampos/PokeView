@@ -13,6 +13,8 @@ const metrics = {
   navBarHeight: (Platform.OS === 'ios') ? 64 : 54,
   statusBarHeight: (Platform.OS === 'ios') ? 20 : 0,
   baseRadius: 50,
+  cardRadius: 15,
+  inputRadius: 5,
 };
 
 export default metrics;

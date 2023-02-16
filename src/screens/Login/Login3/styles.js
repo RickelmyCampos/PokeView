@@ -33,7 +33,8 @@ textNormal:{
     color:colors.textLight,
     textAlign:'center'
 },
-textInput:[general.textInput,{marginTop:10}]
+textInput:[general.textInput,{}],
+txtDescInput:{fontFamily:fonts.family.semiBold,fontSize:fonts.size.regular,color:colors.text}
 
 });
 

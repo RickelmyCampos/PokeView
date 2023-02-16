@@ -14,6 +14,7 @@ import { View, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import Register from '../screens/Login/register';
 import Register1 from '../screens/Login/register/register1';
+import MargikarpNotFound from '../components/MargikarpNotFound';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +23,7 @@ const StackScreens = () => {
 
     return (
         <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name='Home' component={TabScreens} options={{ headerShown: false }}/>
+            <Stack.Screen name='Home' component={TabScreens} options={{ headerShown: false }} />
             <Stack.Screen name='PokeDetails' component={PokeDetails} options={{ headerShown: false }} />
 
         </Stack.Navigator>
@@ -45,7 +46,7 @@ const TabScreens = () => {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen name='HomeTab' component={Home} />
-            <Tab.Screen name='Settings' component={Settings}  />
+            <Tab.Screen name='Settings' component={Settings} />
         </Tab.Navigator>
     );
 }
@@ -65,8 +66,9 @@ function isAuth() {
         return subscriber; // unsubscribe on unmount
     }, []);
 
-    if (initializing) return (<View><Text>
-        CARREGANDO</Text></View>);
+    if (initializing) return (
+        <MargikarpNotFound/>
+        );
 
     if (!user) {
         return (

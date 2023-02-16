@@ -5,6 +5,7 @@ export const selectIcon = (name, size, weight, color) => {
             return (<Icon.ArrowRight size={size} weight={weight} color={color} />)
         case "Airplane":
             return (<Icon.Airplane size={size} weight={weight} color={color} />)
+            
         case "Scroll":
             return (<Icon.Scroll size={size} weight={weight} color={color} />)
         case "Tag":
