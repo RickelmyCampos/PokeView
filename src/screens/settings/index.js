@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React, useContext, useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { colors, general, metrics } from '../../styles';
 import { Switch } from 'react-native-paper';
@@ -7,12 +7,16 @@ import auth from '@react-native-firebase/auth';
 import SettingsOptions from '../../components/SettingsOptions';
 import { Avatar } from 'react-native-paper';
 import { Logout } from '../../services/auth';
+import { UserContext } from '../../context/UserContextProvider';
 const Settings = () => {
   const [switch1, setSwitch1] = useState(false);
   const [switch2, setSwitch2] = useState(false);
   const [switch3, setSwitch3] = useState(false);
   const [switch4, setSwitch4] = useState(false);
-  const user = auth().currentUser;
+  const {
+    user
+  } = useContext(UserContext);
+  
   console.log(user)
   const pokedex = {
     title: 'Pokédex',
@@ -115,7 +119,7 @@ const Settings = () => {
       },
       {
         subtitle: 'Senha',
-        desc: '••••••••••••••••',
+        desc: '*******',
         hasSwitch: false,
         altInfo:true,
         clicked:true
@@ -178,6 +182,7 @@ const Settings = () => {
 
           {/* componentes */}
           {/* pokedex */}
+          {/* Pesando na redenrização */}
           {
             !user.isAnonymous&&(<SettingsOptions options={userInfo} />)
           }

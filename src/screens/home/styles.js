@@ -1,11 +1,14 @@
 import {StyleSheet} from 'react-native';
+import { colors } from '../../styles';
 
 const styles = StyleSheet.create({
 main:{
     justifyContent:'center',
     alignItems:'center',
     width:'90%',
-    alignSelf:'center'
+    alignSelf:'center',
+    height:'100%'
+    
 },
 contentImagePkm:{
     height:100,

@@ -20,15 +20,35 @@ const colors = {
     fireType:'#FF9D55',
     iceType:'#73CEC0',
     grassType:'#63BC5A',
-    fightType:'#CE416B',
+    fightingType:'#CE416B',
     normalType:'#919AA2',
     darkType:'#5A5465',
     ironType:'#5A8EA2',
     rockType:'#C5B78C',
     psychicType:'#FA7179',
     groundType:'#D97845',
-    poison:'#B567CE',
-    flying:'#89AAE3'
+    poisonType:'#B567CE',
+    flyingType:'#89AAE3',
+    bugType:'#91C12F',
+    //types backgroundcolor
+    waterBackground:'#EBF1F8',
+    dragonBackground:'#E4EEF6',
+    electricBackground:'#FBF8E9',
+    fairyBackground:'#FBF1FA',
+    ghostBackground:'#EBEDF4',
+    fireBackground:'#FCF3EB',
+    iceBackground:'#F1FBF9',
+    grassBackground:'#EDF6EC',
+    fightingBackground:'#F8E9EE',
+    normalBackground:'#F1F2F3',
+    darkBackground:'#ECEBED',
+    ironBackground:'#ECF1F3',
+    rockBackground:'#F7F5F1',
+    psychicBackground:'#FCEEEF',
+    groundBackground:'#F9EFEA',
+    poisonBackground:'#F5EDF8',
+    flyingBackground:'#F1F4FA',
+    bugBackground:'#F1F6E8'
   };
   
   export default colors;

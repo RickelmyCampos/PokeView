@@ -1,14 +1,32 @@
 import { StyleSheet } from 'react-native';
-import { metrics } from '../../styles';
+import { colors, fonts, metrics } from '../../styles';
 
 const styles = StyleSheet.create({
     main: {
-        backgroundColor: 'red',
         width: '100%',
-        height: 50,
+        marginVertical:5,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: metrics.cardRadius
+        borderRadius: metrics.cardRadius,
+        flexDirection: 'row',
+        maxHeight:180
+    },
+    pokemonContent: {
+        height: '100%',
+        width: '40%',
+        borderRadius: metrics.cardRadius,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    txtNumber: {
+        fontFamily:fonts.family.semiBold,
+        color:colors.textGreyDark,
+        fontSize:fonts.size.regular
+    },
+    txtName: {
+        fontFamily:fonts.family.bold,
+        color:colors.text,
+        fontSize:fonts.size.large
     }
 });
 

@@ -6,8 +6,8 @@ const axios = setupCache(Axios);
 export const api =axios.create({baseURL:'https://pokeapi.co/api/v2'});
 
 export const Get=(url) =>{
-  return new Promise((resolve,reject)=>{
-    axios.get(url).then((res)=>{
+  return new Promise(async(resolve,reject)=>{
+    await axios.get(url).then((res)=>{
      resolve(res) 
     }).catch((res)=>reject(res))
   })
