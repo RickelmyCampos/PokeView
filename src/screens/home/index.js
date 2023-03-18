@@ -32,6 +32,7 @@ const Home = ({ navigation }) => {
 
         ))} */}
         <FlatList
+        showsVerticalScrollIndicator={false}  
         data={pokedex}
         renderItem={({item}) => <CardPokemon item={item} />}
         keyExtractor={item => item.entry_number}

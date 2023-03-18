@@ -48,58 +48,58 @@ const PokeDetails = ({ navigation, route }) => {
     const getSvgByType = (type) => {
         switch (type) {
             case 'bug':
-                return require(`../../assets/icons/types/bug.svg`)
+                return require(`../../assets/icons/types/outlines/bug.png`)
                 break;
             case 'dark':
-                return require(`../../assets/icons/types/dark.svg`)
+                return require(`../../assets/icons/types/outlines/dark.png`)
                 break;
             case 'dragon':
-                return require(`../../assets/icons/types/dragon.svg`)
+                return require(`../../assets/icons/types/outlines/dragon.png`)
                 break;
             case 'electric':
-                return require(`../../assets/icons/types/electric.svg`)
+                return require(`../../assets/icons/types/outlines/electric.png`)
                 break;
             case 'fairy':
-                return require(`../../assets/icons/types/fairy.svg`)
+                return require(`../../assets/icons/types/outlines/fairy.png`)
                 break;
             case 'fighting':
-                return require(`../../assets/icons/types/fighting.svg`)
+                return require(`../../assets/icons/types/outlines/fighting.png`)
                 break;
             case 'fire':
-                return require(`../../assets/icons/types/fire.svg`)
+                return require(`../../assets/icons/types/outlines/fire.png`)
                 break;
             case 'flying':
-                return require(`../../assets/icons/types/flying.svg`)
+                return require(`../../assets/icons/types/outlines/flying.png`)
                 break;
             case 'ghost':
-                return require(`../../assets/icons/types/ghost.svg`)
+                return require(`../../assets/icons/types/outlines/ghost.png`)
                 break;
             case 'grass':
-                return require(`../../assets/icons/types/grass.svg`)
+                return require(`../../assets/icons/types/outlines/grass.png`)
                 break;
             case 'ground':
-                return require(`../../assets/icons/types/ground.svg`)
+                return require(`../../assets/icons/types/outlines/ground.png`)
                 break;
             case 'ice':
-                return require(`../../assets/icons/types/ice.svg`)
+                return require(`../../assets/icons/types/outlines/ice.png`)
                 break;
             case 'normal':
-                return require(`../../assets/icons/types/normal.svg`)
+                return require(`../../assets/icons/types/outlines/normal.png`)
                 break;
             case 'poison':
-                return require(`../../assets/icons/types/poison.svg`)
+                return require(`../../assets/icons/types/outlines/poison.png`)
                 break;
             case 'psychic':
-                return require(`../../assets/icons/types/psychic.svg`)
+                return require(`../../assets/icons/types/outlines/psychic.png`)
                 break;
             case 'rock':
-                return require(`../../assets/icons/types/rock.svg`)
+                return require(`../../assets/icons/types/outlines/rock.png`)
                 break;
             case 'steel':
-                return require(`../../assets/icons/types/steel.svg`)
+                return require(`../../assets/icons/types/outlines/steel.png`)
                 break;
             case 'water':
-                return require(`../../assets/icons/types/water.svg`)
+                return require(`../../assets/icons/types/outlines/water.png`)
                 break;
 
             default:

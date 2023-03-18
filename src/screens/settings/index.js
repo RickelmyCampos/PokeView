@@ -144,7 +144,7 @@ const Settings = () => {
       },]
   }
   return (
-    <View style={{ width: metrics.screenWidth, height: metrics.screenHeight, backgroundColor: colors.background }}>
+    user.displayName?(<View style={{ width: metrics.screenWidth, height: metrics.screenHeight, backgroundColor: colors.background }}>
       {(!user.isAnonymous) && (
         <View style={styles.loginMain}>
             <View style={[styles.loginContent,]}>
@@ -195,7 +195,10 @@ const Settings = () => {
           }
         </View>
       </ScrollView>
-    </View>
+    </View>):(<View style={{ width: metrics.screenWidth, height: metrics.screenHeight, backgroundColor: colors.background }}>
+<Text>Carregando  </Text>
+    </View>)
+    
 
   );
 }
