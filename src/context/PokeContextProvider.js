@@ -27,7 +27,7 @@ const PokeContextProvider = ({ children }) => {
               pokemon.pokemon_infos = res.data;
             })
             .catch((e) => {
-              console.log('não encontrei a informação', e);
+              console.log('não encontrei a informação', e,item.entry_number);
             });
           return pokemon;
         });
