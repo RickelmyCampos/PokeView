@@ -10,5 +10,5 @@ export const calcPesoAlt = (peso) => {
     return String(peso / 10).replace('.', ',')
 }
 export const firstUpper=(text)=>{
-    return text.charAt(0).toUpperCase() + text.slice(1);
+    return (text.charAt(0).toUpperCase() + text.slice(1)).replace('-',' ');
 }

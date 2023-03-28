@@ -21,6 +21,11 @@ const general = {
     fontFamily:fonts.family.semiBold,
     fontSize: fonts.size.regular,
   },
+  Text: {
+    color: colors.text,
+    fontFamily:fonts.family.regular,
+    fontSize: fonts.size.regular,
+  },
   buttonStyle:{
     backgroundColor:colors.primary,
     padding:metrics.baseMargin,

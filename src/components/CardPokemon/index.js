@@ -86,46 +86,36 @@ const CardPokemon = ({ navigation, item }) => {
         }
     }
 
-    useEffect(() => {
-
-        const fechPokemon = () => {
-            api.get(`/pokemon/${item.entry_number}`).then((res) => {
-                setPokeDetails(res.data)
-                //console.log(res.data)
-            }).catch((e) => console.log(e))
-
-        }
-        fechPokemon()
-
-    }, [])
+    
     const handleOnLoad = () => {
         setLoading(true);
-        console.log('carregou')
+        
     };
     return (
-        <View style={[styles.main, { backgroundColor: pokeDetails.types ? colors[`${pokeDetails?.types[0]?.type?.name}Background`] : colors.allTypes }]}>
+        
+        <TouchableOpacity onPress={navigation} style={[styles.main, { backgroundColor: item.pokemon_infos.types ? colors[`${item.pokemon_infos?.types[0]?.type?.name}Background`] : colors.allTypes }]}>
             <View style={{ height: '100%', width: '60%', padding: 10 }}>
                 <View style={{ width: '100%' }}>
-                    <Text style={styles.txtNumber}>N°{format_numDex(item.entry_number)}</Text>
-                    <Text style={styles.txtName}>{firstUpper(item.pokemon_species.name)}</Text>
+                    <Text style={styles.txtNumber}>N°{format_numDex(item.pokemon_infos.id)}</Text>
+                    <Text style={styles.txtName}>{firstUpper(item.pokemon_infos.species.name)}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', width: '100%', }}>
-                    {pokeDetails.types && pokeDetails.types.map((item, index) => (
+                    {item.pokemon_infos.types && item.pokemon_infos.types.map((item, index) => (
 
                         <TypeComponent key={index} type={item.type.name} />
                     ))}
 
                 </View>
             </View>
-            <View style={[styles.pokemonContent, { backgroundColor: pokeDetails.types ? colors[`${pokeDetails.types[0].type.name}Type`] : colors.allTypes }]}>
-                {pokeDetails.types&&<ImageBackground source={getTypeIcon(pokeDetails?.types[0]&&pokeDetails?.types[0]?.type?.name)}>
+            <View style={[styles.pokemonContent, { backgroundColor: item.pokemon_infos.types ? colors[`${item.pokemon_infos.types[0].type.name}Type`] : colors.allTypes }]}>
+                {item.pokemon_infos.types&&<ImageBackground source={getTypeIcon(item.pokemon_infos?.types[0]&&item.pokemon_infos?.types[0]?.type?.name)}>
 
-                    {pokeDetails.sprites && (<Image source={{ uri: pokeDetails.sprites.front_default }} onLoad={handleOnLoad} style={{ width: 100, height: 100, resizeMode: 'contain', display: loading ? 'flex' : 'none' }} />)}
+                    {item.pokemon_infos.sprites && (<Image source={{ uri: item.pokemon_infos.sprites.front_default }} onLoad={handleOnLoad} style={{ width: 100, height: 100, resizeMode: 'contain', display: loading ? 'flex' : 'none' }} />)}
                     {!loading && (<Image source={require('../../assets/images/margikarp.png')} style={{ width: 100, height: 100, resizeMode: 'contain' }} />)}
                 </ImageBackground>}
 
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 export default CardPokemon;

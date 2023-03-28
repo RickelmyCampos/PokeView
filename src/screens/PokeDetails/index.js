@@ -10,10 +10,10 @@ import Header from '../../components/Header';
 import StatusBase from '../../components/StatusBase/';
 
 const PokeDetails = ({ navigation, route }) => {
-    const url = route.params.details;
+    const url = route.params;
     const [catched, setCatched] = useState(false);
-    const [details, setDetails] = useState({})
-    const [dexDetails, setDexDetails] = useState({})
+  
+   
     const [isShiny, setIsShiny] = useState(false)
     const [stats,setStats]=useState({
         hp:0,
@@ -29,20 +29,10 @@ const PokeDetails = ({ navigation, route }) => {
     }
     useEffect(() => {
         navigation.setParams({ backgroundColor: 'red' })
-        console.log(url)
-        Get(url).then(async (res) => {
-            setDexDetails(res.data)
-            console.log(res.data)
-            await Get(res.data.varieties[0].pokemon.url).then((response) => {
-                setDetails(response.data)
-                console.log(response.data)
-                response.data.stats.map(item=>{
-                    updateValue(item.stat.name,item.base_stat)
-
-                })
-            }).catch((err) => console.log(err))
-        }).catch((e) => console.log(e))
-
+        url.pokemon_infos.stats.map(item=>{
+            updateValue(item.stat.name,item.base_stat)
+        })
+        
     }, [])
 
     const getSvgByType = (type) => {
@@ -112,7 +102,7 @@ const PokeDetails = ({ navigation, route }) => {
         <View style={styles.main}>
             <Header
                 type={1}
-                backgroundColor={details?.types && getColorByType(details?.types[0].type.name)}
+                backgroundColor={url.pokemon_infos?.types && getColorByType(url.pokemon_infos.types[0].type.name)}
                 navigate={() => navigation.goBack()}
                 catched={catched}
                 setCatched={() => setCatched(!catched)}
@@ -125,22 +115,22 @@ const PokeDetails = ({ navigation, route }) => {
                         alignItems: 'center',
                         width: '100%'
 
-                    }}><LinearGradient colors={[details?.types ? getColorByType(details?.types[0].type.name) : '#fff', '#fff']} style={{
-                        //backgroundColor: details?.types&&getColorByType(details?.types[0].type.name),
+                    }}><LinearGradient colors={[url.pokemon_infos.types ? getColorByType(url.pokemon_infos.types[0].type.name) : '#fff', '#fff']} style={{
+                        //backgroundColor: url.pokemon_infos?.types&&getColorByType(url.pokemon_infos?.types[0].type.name),
                         width: '130%', height: 220,
                         borderBottomLeftRadius: 300,
                         borderBottomRightRadius: 300,
                         justifyContent: 'center',
                         alignItems: 'center'
                     }} >
-                            {/* {details?.types && <SvgUri source={getSvgByType(details?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />} */}
+                            {/* {url.pokemon_infos?.types && <SvgUri source={getSvgByType(url.pokemon_infos?.types[0].type.name)} width="180" height={"180"} fill={'rgba(255,255,255,0.5)'} />} */}
                         </LinearGradient>
                         <TouchableOpacity onPress={() => setIsShiny(!isShiny)}>
 
                             <Image
                                 style={{ height: 200, width: 200, bottom: 130 }}
                                 source={{
-                                    uri: (!isShiny) ? details?.sprites?.front_default : details?.sprites?.front_shiny
+                                    uri: (!isShiny) ? url.pokemon_infos.sprites?.front_default : url.pokemon_infos.sprites?.front_shiny
                                     //other["official-artwork"]?.front_default
                                 }}
                             />
@@ -149,8 +139,8 @@ const PokeDetails = ({ navigation, route }) => {
                     <View style={styles.infoDex}>
                         <View>
 
-                            <Text style={styles.textPokemonName}>{dexDetails?.name && firstUpper(dexDetails?.name)}</Text>
-                            <Text style={styles.textDexNumber}> N°{dexDetails?.id && format_numDex(dexDetails?.id)}</Text>
+                            <Text style={styles.textPokemonName}>{url.pokemon_infos.species.name && firstUpper(url.pokemon_infos.species.name)}</Text>
+                            <Text style={styles.textDexNumber}> N°{url.pokemon_infos.id && format_numDex(url.pokemon_infos.id)}</Text>
                         </View>
                         <View>
 
@@ -159,7 +149,7 @@ const PokeDetails = ({ navigation, route }) => {
                         </View>
                     </View>
                     <View style={styles.contentTypes}>
-                        {details.types && details?.types.map(item => (
+                        {url.pokemon_infos.types && url.pokemon_infos.types.map(item => (
                             <View key={item.slot} style={styles.cardType}>
                                 <View style={{ backgroundColor: getColorByType(item.type.name), height: 30, width: 30, borderRadius: 30, margin: 5, justifyContent: 'center', alignItems: 'center' }}>
                                     {/* {item.type.name && <SvgUri source={getSvgByType(item.type.name)} width="18" height={"18"} />} */}
@@ -184,29 +174,30 @@ const PokeDetails = ({ navigation, route }) => {
                         <View style={styles.row}>
 
                             <View style={styles.cell}>
-                                <Text style={styles.textValue}>{details?.weight && calcPesoAlt(details?.weight)} kg</Text>
+                                <Text style={styles.textValue}>{url.pokemon_infos.weight && calcPesoAlt(url.pokemon_infos.weight)} kg</Text>
                             </View>
                             <View style={styles.cell}>
-                                <Text style={styles.textValue}>{details?.height && calcPesoAlt(details?.height)} m</Text>
+                                <Text style={styles.textValue}>{url.pokemon_infos.height && calcPesoAlt(url.pokemon_infos.height)} m</Text>
                             </View>
                             <View style={styles.cell}>
-                                <Text style={styles.textValue}>{details.abilities && details?.abilities[0]?.ability.name}</Text>
+                                <Text style={styles.textValue}>{url.pokemon_infos.abilities && url.pokemon_infos.abilities[0]?.ability.name}</Text>
                             </View>
                         </View>
 
                     </View>
-                    <View style={styles.description}>
+                    {url.pokemon_especies.flavor_text_entries.length>0&&<View style={styles.description}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Text style={styles.textDescriptionInfo}>Pokemon {dexDetails?.flavor_text_entries && dexDetails?.flavor_text_entries[0]?.version.name}</Text>
-                            <Text style={styles.textDescriptionInfo}>Language: {dexDetails?.flavor_text_entries && dexDetails?.flavor_text_entries[0]?.language.name}</Text>
+                            <Text style={styles.textDescriptionInfo}>Pokemon {url.pokemon_especies?.flavor_text_entries && url.pokemon_especies?.flavor_text_entries[0]?.version.name}</Text>
+                            <Text style={styles.textDescriptionInfo}>Language: {url.pokemon_especies?.flavor_text_entries && url.pokemon_especies?.flavor_text_entries[0]?.language.name}</Text>
                         </View>
                         <Text style={styles.textDescription}>
-                            {dexDetails?.flavor_text_entries && format_descDex(dexDetails?.flavor_text_entries[0]?.flavor_text)}
+                            {url.pokemon_especies?.flavor_text_entries && format_descDex(url.pokemon_especies?.flavor_text_entries[0]?.flavor_text)}
                         </Text>
-                    </View>
-                    <Text style={[styles.textValue,{color:details?.types && getColorByType(details?.types[0].type.name)}]}>Base Stats</Text>
+                    </View>}
+                    
+                    <Text style={[styles.textValue,{color:url.pokemon_infos?.types && getColorByType(url.pokemon_infos?.types[0].type.name)}]}>Base Stats</Text>
                     <StatusBase 
-                    color={details?.types && getColorByType(details?.types[0].type.name)} 
+                    color={url.pokemon_infos?.types && getColorByType(url.pokemon_infos?.types[0].type.name)} 
                     Hp={stats.hp}
                     Attack={stats.attack}
                     Defense={stats.defense}
