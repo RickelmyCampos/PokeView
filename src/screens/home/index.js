@@ -11,8 +11,29 @@ import { PokeContext } from '../../context/PokeContextProvider';
 
 const Home = ({ navigation }) => {
 
+  const pokemonTypes = [
+    'Normal',
+    'Fire',
+    'Water',
+    'Electric',
+    'Grass',
+    'Ice',
+    'Fighting',
+    'Poison',
+    'Ground',
+    'Flying',
+    'Psychic',
+    'Bug',
+    'Rock',
+    'Ghost',
+    'Dragon',
+    'Dark',
+    'Steel',
+    'Fairy'
+  ];
   const [pokedex, setPokedex] = useState([])
   const [search, setSearch] = useState('')
+  const [openFilter, setopenFilter] = useState(false)
   const [filteredList, setFilteredList] = useState([]);
   const { pokemons } = useContext(PokeContext)
   //animação de header
@@ -98,12 +119,12 @@ const Home = ({ navigation }) => {
         </View>
         <Animated.View style={[styles.filters, { transform: [{ translateY: headerTranslate }] }]}>
           <View style={[styles.filtersContent,]}>
-            <View style={[styles.filterOptions]}>
+            <TouchableOpacity style={[styles.filterOptions]} onPress={()=>setopenFilter(!openFilter)}>
               <Text style={[styles.textFilter]}> Tipo</Text>
-            </View>
-            <View style={[styles.filterOptions]}>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.filterOptions]}>
               <Text style={[styles.textFilter]}> Ordem</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
         </Animated.View>
@@ -120,6 +141,10 @@ const Home = ({ navigation }) => {
           keyExtractor={item => item.pokemon_especies.id}
         />
       </View>
+      <Animated.View style={{position:'absolute',height:100,backgroundColor:colors.background,bottom:0,zIndex:100}}>
+        {pokemonTypes.map((item,index)=><Text key={index}>{item}</Text>)}
+
+      </Animated.View>
     </View>
   );
 }

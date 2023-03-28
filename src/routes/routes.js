@@ -103,9 +103,10 @@ const StackAuth = () => {
 }
 const TabScreens = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}
+    <Tab.Navigator screenOptions={{ headerShown: false}}
+    
       tabBar={props => <MyTabBar {...props} />}>
-      <Tab.Screen name='HomeTab' component={Home} />
+      <Tab.Screen name='HomeTab' component={Home}/>
       <Tab.Screen name='Settings' component={Settings} />
     </Tab.Navigator>
   );
