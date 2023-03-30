@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#000'
     },
-    textInput: [general.textInput, { borderRadius: 50, height: 50, paddingHorizontal: 20, borderColor: colors.grey, width: '90%' }, general.Text],
+    textInput: [general.textInput, { borderRadius: 50, height: 50, paddingHorizontal: 20, borderColor: colors.grey, width: '90%',color:colors.black}, general.Text],
     filters: {
         zIndex: 3,
         position: 'absolute',
@@ -80,7 +80,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    textFilter:[general.buttonText]
+    textFilter: [general.buttonText],
+    bottomsheetType: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: colors.bugBackground,
+        justifyContent:'center',
+        alignItems:'center'
+    }
 });
 
 export default styles;

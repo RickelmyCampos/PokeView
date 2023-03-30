@@ -17,6 +17,8 @@ import Register1 from '../screens/Login/register/register1';
 import MargikarpNotFound from '../components/MargikarpNotFound';
 import {PokeContext} from '../context/PokeContextProvider';
 import LoadingScreen from '../screens/LoadingScreen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { BottomSheet, BottomSheetFlatList, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +26,7 @@ const Stack = createNativeStackNavigator();
 function MyTabBar({ state, descriptors, navigation }) {
 
   return (
-    <View style={{ flexDirection: 'row', backgroundColor: 'red', height: 80 }}>
+    <View style={{ flexDirection: 'row', backgroundColor: 'red', height: 50 }}>
 
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
@@ -103,12 +105,16 @@ const StackAuth = () => {
 }
 const TabScreens = () => {
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false}}
     
+      <BottomSheetModalProvider>
+    <Tab.Navigator screenOptions={{ headerShown: false}}
+      
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name='HomeTab' component={Home}/>
       <Tab.Screen name='Settings' component={Settings} />
     </Tab.Navigator>
+    </BottomSheetModalProvider>
+ 
   );
 }
 function isAuth() {

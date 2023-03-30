@@ -1,3 +1,5 @@
+import { colors } from "../styles";
+
 const colorTypes = {
     bug: '#A6B91A',
     dark: '#705746',
@@ -21,60 +23,87 @@ const colorTypes = {
 export const getColorByType = (type) => {
     switch (type) {
         case 'bug':
-            return colorTypes.bug
+            return colors.bugType
             break;
         case 'dark':
-            return colorTypes.dark
+            return colors.darkType
             break;
         case 'dragon':
-            return colorTypes.dragon
+            return colors.dragonType
             break;
         case 'electric':
-            return colorTypes.electric
+            return colors.electricType
             break;
         case 'fairy':
-            return colorTypes.fairy
+            return colors.fairyType
             break;
         case 'fighting':
-            return colorTypes.fighting
+            return colors.fightingType
             break;
         case 'fire':
-            return colorTypes.fire
+            return colors.fireType
             break;
         case 'flying':
-            return colorTypes.flying
+            return colors.flyingType
             break;
         case 'ghost':
-            return colorTypes.ghost
+            return colors.ghostType
             break;
         case 'grass':
-            return colorTypes.grass
+            return colors.grassType
             break;
         case 'ground':
-            return colorTypes.ground
+            return colors.groundType
             break;
         case 'ice':
-            return colorTypes.ice
+            return colors.iceType
             break;
         case 'normal':
-            return colorTypes.normal
+            return colors.normalType
             break;
         case 'poison':
-            return colorTypes.poison
+            return colors.poisonType
             break;
         case 'psychic':
-            return colorTypes.psychic
+            return colors.psychicType
             break;
         case 'rock':
-            return colorTypes.rock
+            return colors.rockType
             break;
         case 'steel':
-            return colorTypes.steel
+            return colors.steelType
             break;
         case 'water':
-            return colorTypes.water
+            return colors.waterType
             break;
 
         default:
+            return colors.allTypes
     }
 }
+export const getColorTextByType = (type) => {
+    const obj = {
+        bug: colors.black,
+        dark: colors.white,
+        dragon: colors.white,
+        electric: colors.black,
+        fairy: colors.black,
+        fighting: colors.white,
+        fire: colors.black,
+        flying: colors.black,
+        ghost: colors.white,
+        grass: colors.black,
+        ground: colors.black,
+        ice: colors.black,
+        normal: colors.black,
+        poison: colors.black,
+        psychic: colors.black,
+        rock: colors.black,
+        steel: colors.black,
+        water: colors.black
+    };
+
+    return obj[type] || colors.white;
+    
+}
+

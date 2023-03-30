@@ -2,6 +2,8 @@ const colors = {
     header: '#333333',
     primary: '#173EA5',
     background:'#ffffff',
+    white:'#ffffff',
+    black:'#000000',
     grey:'#E6E6E6',
     
     buttonText:'#ffffff',
